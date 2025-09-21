@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Change the port if your Flask backend runs elsewhere
+// Change the port if your Django backend runs elsewhere
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'http://127.0.0.1:8000/api',
   timeout: 5000,
 });
 
@@ -19,3 +19,4 @@ export default {
   // GET /api/elevation/:lat/:lon
   getElevation: (lat, lon) => api.get(`/elevation/${lat}/${lon}`),
 };
+

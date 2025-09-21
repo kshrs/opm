@@ -50,10 +50,11 @@ def locations(request):
 @api_view(['POST'])
 def predict(request):
     payload = request.data
-    strain = payload.get('strain', 0)
-    pore = payload.get('pore_pressure', 0)
-    incl = payload.get('inclination', 0)
-    vib = payload.get('vibration', 0)
+    strain = float(payload.get('strain', 0))
+    pore = float(payload.get('porePressure', 0))
+    incl = float(payload.get('inclination', 0))
+    vib = float(payload.get('vibration', 0))
+    print(payload)
     sf = max(0.3, 2.0 - strain/100 - pore/100 - incl/2 - vib*10)
     if sf < 0.8:
         status, risk = 'CRITICAL', 95
@@ -71,3 +72,4 @@ def send_alert(request):
     methods = request.data.get('method',[])
     # Stub—integrate SMS/email here
     return Response({'sent_via': methods, 'message': message})
+
