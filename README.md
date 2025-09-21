@@ -1,4 +1,4 @@
-# Slope Stability Monitoring System (OPM)
+# Slope Stability Monitoring System (Open Pit Mine)
 
 This project was developed for the Smart India Hackathon (SIH). It uses real-time geotechnical sensor data and AI models to predict slope failures in open pit mines. The backend is built with Django REST framework and the frontend uses React.
 
@@ -10,7 +10,6 @@ opm/
 │   ├── backend/             # Django project folder
 │   ├── api/                 # Django app with views and serializers
 │   ├── manage.py
-│   └── requirements.txt     # Python dependencies
 ├── frontend/
 │   ├── public/              # React public files (index.html, etc.)
 │   ├── src/                 # React source files
@@ -18,7 +17,6 @@ opm/
 │   │   ├── services/        # API client services
 │   │   └── styles/          # CSS stylesheets
 │   ├── package.json         # Node dependencies and scripts
-│   └── node_modules/        # Installed Node packages
 └── README.md                # This documentation file
 ```
 
