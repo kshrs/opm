@@ -1,0 +1,89 @@
+/* Container */
+.container {
+  max-width: 960px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* TopBar */
+.navbar {
+  border-bottom: 1px solid #ddd;
+}
+.navbar .navbar-brand {
+  font-weight: bold;
+  color: #333;
+  padding-left: 10px;
+}
+.navbar .navbar-text {
+  color: #555;
+  align: center;
+  padding-right: 10px;
+}
+
+/* MapView */
+#map {
+  width: 100%;
+  height: 450px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+}
+
+/* PredictionForm */
+.card-predict {
+  margin-bottom: 20px;
+}
+.card-predict .card-header {
+  background-color: #007bff;
+  color: white;
+}
+.card-predict .form-control {
+  border-radius: 4px;
+}
+.btn-predict {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* AlertForm */
+.card-alert {
+  margin-bottom: 20px;
+}
+.card-alert .card-header {
+  background-color: #dc3545;
+  color: white;
+}
+.card-alert textarea {
+  resize: vertical;
+}
+.form-check {
+  margin-bottom: 0.5rem;
+}
+.btn-alert {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* ZoneCards */
+.zone-cards .card {
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.zone-cards .card-header {
+  font-weight: bold;
+}
+.zone-cards .status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+.status-critical { background-color: #ff4444; color: white; }
+.status-warning  { background-color: #ff8800; color: white; }
+.status-caution  { background-color: #ffdd00; color: black; }
+.status-stable   { background-color: #44ff44; color: black; }
+
+/* Utility */
+.text-center { text-align: center; }
+.mb-3 { margin-bottom: 1rem; }
