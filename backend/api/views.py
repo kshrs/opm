@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import datetime
+from xgboost import XGBRegressor
 
 @api_view(['GET'])
 def locations(request):
@@ -46,6 +47,10 @@ def locations(request):
         ]
     }
     return Response(data)
+
+model = XGBRegressor()
+model.load_model('./core/model.bin')
+
 
 @api_view(['POST'])
 def predict(request):
