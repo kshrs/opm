@@ -4,12 +4,12 @@ import api from '../services/api';
 
 export default function PredictionForm() {
   const [values, setValues] = useState({ 
-      unitWeight: "", 
-      cohesion: "", 
-      frictionAngle: "",
-      slopeAngle: "", 
-      slopeHeight: "", 
-      porePressure: "",
+      unitWeight: 18.74, 
+      cohesion: 21.81, 
+      frictionAngle: 38.24,
+      slopeAngle: 41.90, 
+      slopeHeight: 18.45, 
+      porePressure: 0.84,
       reinforcementType: "Drainage",
   });
   const [result, setResult] = useState(null);
@@ -68,7 +68,7 @@ export default function PredictionForm() {
 
           <div className="mb-2">
             <label>Pore Water Pressure Ratio</label>
-            <input type="number" name="porePressureRatio" value={values.porePressureRatio} onChange={handleChange} />
+            <input type="number" name="porePressureRatio" value={values.porePressure} onChange={handleChange} />
           </div>
 
           <div className="mb-2">
