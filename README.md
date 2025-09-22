@@ -34,7 +34,7 @@ cd opm/backend
 2. Install Python dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install django djangorestframework django-cors-headers requests
 ```
 
 3. Run the Django development server:
