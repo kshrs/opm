@@ -2,6 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
+import pandas as pd
 
 @api_view(['GET'])
 def locations(request):
@@ -55,21 +56,47 @@ model.load_model('./core/model.bin')
 @api_view(['POST'])
 def predict(request):
     payload = request.data
-    strain = float(payload.get('strain', 0))
-    pore = float(payload.get('porePressure', 0))
-    incl = float(payload.get('inclination', 0))
-    vib = float(payload.get('vibration', 0))
-    print(payload)
-    sf = max(0.3, 2.0 - strain/100 - pore/100 - incl/2 - vib*10)
-    if sf < 0.8:
-        status, risk = 'CRITICAL', 95
-    elif sf < 1.0:
-        status, risk = 'WARNING', 75
-    elif sf < 1.2:
-        status, risk = 'CAUTION', 45
+
+    unitWeight = float(payload.get('unitWeight', 0))
+    cohesion = float(payload.get('cohesion', 0))
+    frictionAngle = float(payload.get('frictionAngle', 0))
+    slopeAngle = float(payload.get('slopeAngle', 0))
+    slopeHeight = float(payload.get('slopeHeight', 0))
+    porePressure = float(payload.get('porePressure', 0))
+    reinforcementType = payload.get('reinforcementType', 'Drainage')
+    reinforcementNumeric = 0
+    factor_of_safety = 0
+    if reinforcementType == 'Soil Nailing':
+        reinforcementNumeric = 1
+    elif reinforcementType == 'Geosynthetics':
+        reinforcementNumeric = 2
+    elif reinforcementType == 'Retaining Wall':
+        reinforcementNumeric = 0
     else:
-        status, risk = 'STABLE', 10
-    return Response({'status':status, 'safety_factor':round(sf,3), 'risk_percentage':risk})
+        reinforcementNumeric = 3
+
+    columnNames = ['Unit Weight (kN/m³)', 'Cohesion (kPa)','Internal Friction Angle (°)','Slope Angle (°)','Slope Height (m)','Pore Water Pressure Ratio', 'Reinforcement Numeric']
+    features = [unitWeight, cohesion, frictionAngle, slopeAngle, slopeHeight, porePressure, reinforcementNumeric]
+    if sum(features[:-1]) == 0:
+        status, risk = "No Valid Inputs", 0
+    else:
+
+        df = pd.DataFrame([features], columns = columnNames)
+        factor_of_safety = model.predict(df)[0]
+        print(payload)
+
+        if factor_of_safety < 1.0:
+            status, risk = 'CRITICAL', 95
+        elif factor_of_safety > 1.0 and factor_of_safety < 1.5:
+            status, risk = 'WARNING', 75
+        elif factor_of_safety > 1.5 and factor_of_safety < 2.0:
+            status, risk = 'CAUTION', 50
+        elif factor_of_safety > 2.0:
+            status, risk = 'STABLE', 25
+        else:
+            status, risk = 'None', 0
+
+    return Response({'status':status, 'safety_factor':round(factor_of_safety, 4), 'risk_percentage':risk})
 
 @api_view(['POST'])
 def send_alert(request):

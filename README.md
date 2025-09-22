@@ -10,6 +10,7 @@ opm/
 │   ├── backend/             # Django project folder
 │   ├── api/                 # Django app with views and serializers
 │   ├── manage.py
+│   ├── core/                # Core Featues like ML, Send SMS, etc 
 ├── frontend/
 │   ├── public/              # React public files (index.html, etc.)
 │   ├── src/                 # React source files
