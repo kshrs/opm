@@ -94,7 +94,7 @@ export default function PredictionForm() {
         {result && (
           <div className={`alert mt-3 alert-${result.status.toLowerCase()}`}>
             <p>
-              <strong>Status:</strong> {result.status}
+              <strong>Status:</strong> <h4>{result.status}</h4>
             </p>
             <p>
               <strong>Safety Factor:</strong> {result.safety_factor}
