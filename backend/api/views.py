@@ -50,7 +50,7 @@ def locations(request):
     return Response(data)
 
 model = XGBRegressor()
-model.load_model('./core/model.bin')
+model.load_model('./core/ml/model.bin')
 
 
 @api_view(['POST'])
