@@ -38,7 +38,7 @@ export default function PredictionForm() {
  // reusable props for numeric inputs
   return (
     <div className="card mb-3">
-      <div className="card-header">🔮 Live Stability Prediction</div>
+      <div className="card-header">Live Stability Prediction</div>
       <div className="card-body">
         <form onSubmit={predict}>
           <div className="mb-2">
