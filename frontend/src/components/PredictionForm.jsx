@@ -34,13 +34,20 @@ export default function PredictionForm() {
     const res = await api.predict(payload);
     setResult(res.data);
   }
+  const modelScriptHTML = '/assets/SlopeStabilityMLSpecification.html'
+  const modelScriptPDF = '/assets/SlopeStabilityScript.ipynb'
+
 
  // reusable props for numeric inputs
   return (
     <div className="card mb-3">
-      <div className="card-header">🔮 Live Stability Prediction</div>
+      <div className="card-header">Live Stability Prediction</div>
       <div className="card-body">
         <form onSubmit={predict}>
+            <a href={modelScriptHTML} className="btn btn-primary m-1">Model Training Report</a>
+            <a href={modelScriptPDF} className="btn btn-primary m-1">Download current model script</a>
+            
+            
           <div className="mb-2">
             <label>Unit Weight (kN/m³)</label>
             <input type="number" name="unitWeight" value={values.unitWeight} onChange={handleChange} />
@@ -68,7 +75,7 @@ export default function PredictionForm() {
 
           <div className="mb-2">
             <label>Pore Water Pressure Ratio</label>
-            <input type="number" name="porePressureRatio" value={values.porePressure} onChange={handleChange} />
+            <input type="number" name="porePressure" value={values.porePressure} onChange={handleChange} />
           </div>
 
           <div className="mb-2">
