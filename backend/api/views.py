@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
 import pandas as pd
+import core.alert.sms as sms
 
 @api_view(['GET'])
 def locations(request):
@@ -103,5 +104,9 @@ def send_alert(request):
     message = request.data.get('message','')
     methods = request.data.get('method',[])
     # Stub—integrate SMS/email here
+    if "sms" in methods:
+        sms.send_alert_message(message)
+
+
     return Response({'sent_via': methods, 'message': message})
 

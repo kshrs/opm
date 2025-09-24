@@ -45,7 +45,7 @@ export default function PredictionForm() {
       <div className="card-body">
         <form onSubmit={predict}>
             <a href={modelScriptHTML} className="btn btn-primary m-1">Model Training Report</a>
-            <a href={modelScriptPDF} className="btn btn-primary m-1">Download current model script</a>
+            <a href={modelScriptPDF} className="btn btn-primary m-1">Download Current Model Script</a>
             
             
           <div className="mb-2">
