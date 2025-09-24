@@ -3,9 +3,10 @@ from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
 import pandas as pd
-import core.ml.email_alert as ea
+import core.ml.email_alert as email
 import asyncio
 
+import core.alert.sms as sms
 
 @api_view(['GET'])
 def locations(request):
@@ -104,6 +105,7 @@ def predict(request):
 @api_view(['POST'])
 def send_alert(request):
     message = request.data.get('message','')
+
     methods = request.data.get('method',[]) 
     worker_emails = ["gashwinbalaji1@gmail.com"] 
     alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
@@ -118,11 +120,15 @@ def send_alert(request):
     """
 
 
-    asyncio.run(ea.send_email_alert(
+    asyncio.run(email.send_email_alert(
         recipient_emails=worker_emails,
         subject=alert_subject,
         body=alert_body
     ))
+
+    if "sms" in methods:
+        sms.send_alert_message(message)
+
 
     return Response({'sent_via': methods, 'message': message})
 
