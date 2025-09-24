@@ -9,9 +9,14 @@ export default function AlertForm() {
     setMethods({ ...methods, [name]: !methods[name] });
   }
 
-  async function send() {
+  function send() {
     const selected = Object.keys(methods).filter(m => methods[m]);
-    await api.post('/send-alert', { message, method: selected });
+    const payload = {
+      message : message,
+      method : selected
+    }
+
+    api.sendAlert(payload);
     alert('Sent via ' + selected.join(', '));
   }
 

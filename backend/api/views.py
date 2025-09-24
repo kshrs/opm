@@ -3,6 +3,9 @@ from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
 import pandas as pd
+import core.ml.email_alert as ea
+import asyncio
+
 
 @api_view(['GET'])
 def locations(request):
@@ -101,7 +104,25 @@ def predict(request):
 @api_view(['POST'])
 def send_alert(request):
     message = request.data.get('message','')
-    methods = request.data.get('method',[])
-    # Stub—integrate SMS/email here
+    methods = request.data.get('method',[]) 
+    worker_emails = ["gashwinbalaji1@gmail.com"] 
+    alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
+    alert_body = """
+    Test  1: This is an automated emergency alert.
+    
+    A potential rockfall has been detected by the monitoring system in Sector 4.
+    
+    Please evacuate the area immediately and proceed to the designated safety zone. Await further instructions from the site supervisor.
+    
+    Stay safe.
+    """
+
+
+    asyncio.run(ea.send_email_alert(
+        recipient_emails=worker_emails,
+        subject=alert_subject,
+        body=alert_body
+    ))
+
     return Response({'sent_via': methods, 'message': message})
 
