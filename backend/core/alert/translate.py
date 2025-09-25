@@ -1,13 +1,25 @@
-def tamil(sector,location):
-   a=f""" அவசர பாதுகாப்பு எச்சரிக்கை
+from deep_translator import GoogleTranslator
+def lang_change(language,text= """URGENT SAFETY ALERT
 
-    இடம்: {location} தற்போது நிலையற்ற நிலையில் உள்ளது (பாதுகாப்பு காரணி: {safety_factor}).
+    Location: Open Pit North is now unstable (Safety Factor: 0.95).
 
-    அனைத்து பணியாளர்களும் உடனடியாக வெளியேற வேண்டும்.
-    அடுத்த நிலை இடத்திற்குச் செல்லவும்: {muster_point}.
-    அங்கு மேலதிக அறிவுறுத்தல்களுக்கு காத்திருங்கள்.
+    All personnel must evacuate IMMEDIATELY.
+    Proceed to the next stage position: Muster Point B (South Ridge).
+    Await further instructions there.
 
-    நேரம்: {time_str}
-    கேள்விகளுக்கு சுரங்க திட்ட அமைப்பாளர் {contact_name} அவர்களை {contact_number} என்ற எண்ணில் தொடர்பு கொள்ளவும்."""
+    Time: Thursday 25 September, 2025 at 5:25:53 pm IST.
+    Contact Mine Planner Rajesh Kumar at +91 9876543210 for queries.
+    """):
+    text = text
+    translated_lines = []
+    for line in text.split("\n"):
+        if line.strip():
+            translated_lines.append(GoogleTranslator(source='en', target=language).translate(line))
+        else:
+            translated_lines.append("")
 
-    return a
+    final_text = "\n".join(translated_lines)
+    return final_text
+language = "hi"
+a=lang_change(language)
+print(a)
