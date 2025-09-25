@@ -30,7 +30,6 @@ export default function AlertForm() {
     }
     await api.sendAlert(payload);
     setMessage("");
-    alert('Sent via ' + selected.join(', '));
   }
 
   async function placeAlertText() {
