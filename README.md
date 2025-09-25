@@ -96,8 +96,6 @@ Below is the template and explanation of each field you must fill out:
   "email": "<Sender Email Address>",
   "email_password": "<Sender Email Password>",
 
-  "worker_emails": ["<Additional Recipient Emails>"],
-
   "workers": [
     {
       "name": "<Worker Full Name>",
