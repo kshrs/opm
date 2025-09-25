@@ -11,6 +11,8 @@ opm/
 │   ├── api/                 # Django app with views and serializers
 │   ├── manage.py
 │   ├── core/                # Core Featues like ML, Send SMS, etc 
+│   │   ├── alert/           # Alert Components
+│   │   ├── ml/              # ML Components
 ├── frontend/
 │   ├── public/              # React public files (index.html, etc.)
 │   ├── src/                 # React source files
@@ -35,7 +37,7 @@ cd opm/backend
 2. Install Python dependencies:
 
 ```bash
-pip install django djangorestframework django-cors-headers requests numpy pandas xgboost scikit-learn
+pip install django djangorestframework django-cors-headers requests numpy pandas xgboost scikit-learn aiosmtplib
 ```
 
 3. Run the Django development server:

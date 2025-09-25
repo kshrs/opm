@@ -14,7 +14,6 @@ keys_path = os.path.join(current_dir, "keys.json")
 
 async def send_email_alert(recipient_emails: List[str], subject: str, body: str):
     try:
-          
         with open(keys_path,"r") as file:
             data=json.load(file)
             

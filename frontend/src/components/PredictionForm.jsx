@@ -48,38 +48,51 @@ export default function PredictionForm() {
             <a href={modelScriptPDF} className="btn btn-primary m-1">Download Current Model Script</a>
             
             
-          <div className="mb-2">
-            <label>Unit Weight (kN/m³)</label>
-            <input type="number" name="unitWeight" value={values.unitWeight} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Unit Weight (kN/m³)</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="unitWeight" value={values.unitWeight} onChange={handleChange} />
           </div>
+     </div>
 
-          <div className="mb-2">
-            <label>Cohesion (kPa)</label>
-            <input type="number" name="cohesion" value={values.cohesion} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Cohesion (kPa)</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="cohesion" value={values.cohesion} onChange={handleChange} />
           </div>
+      </div>
 
-          <div className="mb-2">
-            <label>Internal Friction Angle (°)</label>
-            <input type="number" name="frictionAngle" value={values.frictionAngle} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Internal Friction Angle (°)</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="frictionAngle" value={values.frictionAngle} onChange={handleChange} />
           </div>
+      </div>
 
-          <div className="mb-2">
-            <label>Slope Angle (°)</label>
-            <input type="number" name="slopeAngle" value={values.slopeAngle} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Slope Angle (°)</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="slopeAngle" value={values.slopeAngle} onChange={handleChange} />
           </div>
+      </div>
 
-          <div className="mb-2">
-            <label>Slope Height (m)</label>
-            <input type="number" name="slopeHeight" value={values.slopeHeight} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Slope Height (m)</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="slopeHeight" value={values.slopeHeight} onChange={handleChange} />
           </div>
+      </div>
 
-          <div className="mb-2">
-            <label>Pore Water Pressure Ratio</label>
-            <input type="number" name="porePressure" value={values.porePressure} onChange={handleChange} />
+      <div className="row m-2">
+          <label className="col-4 col-form-label">Pore Water Pressure Ratio</label>
+          <div className="col-3 w-auto">
+            <input className="form-control shadow-none" type="number" name="porePressure" value={values.porePressure} onChange={handleChange} />
           </div>
+      </div>
 
-          <div className="mb-2">
-            <label>Reinforcement Type</label>
+      <div className="row m-2">
+          <label className="col-4 col-form-layout">Reinforcement Type</label>
+          <div className="col-3 w-auto">
             <select
               className="form-control"
               name="reinforcementType"
@@ -92,6 +105,7 @@ export default function PredictionForm() {
               <option value="Soil Nailing">Soil Nailing</option>
             </select>
           </div>
+      </div>
 
           <button type="submit" className="btn btn-primary w-100">
             Predict

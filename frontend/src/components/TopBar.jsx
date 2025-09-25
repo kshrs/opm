@@ -16,7 +16,7 @@ export default function TopBar() {
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="#">
-        🏔️ Slope Stability Monitoring Dashboard
+        Slope Stability Monitoring Dashboard
       </a>
       <span className="navbar-text">
       <b>Date:</b> {dateTime.toLocaleDateString()} <b>Time:</b> {dateTime.toLocaleTimeString()}
