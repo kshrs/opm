@@ -5,8 +5,11 @@ from xgboost import XGBRegressor
 import pandas as pd
 import core.alert.email_alert as email
 import asyncio
+import os
 
 import core.alert.sms as sms
+import json
+
 
 @api_view(['GET'])
 def locations(request):
@@ -107,22 +110,25 @@ def send_alert(request):
     message = request.data.get('message','')
 
     methods = request.data.get('method',[]) 
-    worker_emails = ["adviknvss@gmail.com"] 
-    alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
-
-
     
-
-    if "sms" in methods:
-        sms.send_alert_message(message)
-    if "email" in methods:
-        asyncio.run(email.send_email_alert(
-        recipient_emails=worker_emails,
-        subject=alert_subject,
-        body=message
-        ))
+    with open("./core/alert/keys.json", "r") as f:
+        data = json.load(f)
+        worker_emails = data["worker_emails"]
+        alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
 
 
+        
 
-    return Response({'sent_via': methods, 'message': message})
+        if "sms" in methods:
+            sms.send_alert_message(message)
+        if "email" in methods:
+            asyncio.run(email.send_email_alert(
+            recipient_emails=worker_emails,
+            subject=alert_subject,
+            body=message
+            ))
+
+
+
+        return Response({'sent_via': methods, 'message': message})
 
