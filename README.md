@@ -12,6 +12,7 @@ opm/
 │   ├── manage.py
 │   ├── core/                # Core Featues like ML, Send SMS, etc 
 │   │   ├── alert/           # Alert Components
+│   │       ├── keys.json    # Credentials and Contact Informations
 │   │   ├── ml/              # ML Components
 ├── frontend/
 │   ├── public/              # React public files (index.html, etc.)
@@ -69,6 +70,50 @@ npm start
 ```
 
 The frontend UI will be available at `http://localhost:3000`
+
+### Configuration: keys.json
+This project requires a keys.json file to configure credentials and contact information for alerting and notification features. This file should be placed at:
+
+```bash
+opm/backend/core/alert/keys.json
+```
+
+#### Purpose
+
+The keys.json file stores sensitive information and worker details needed for:
+- Connecting to the Twilio SMS service for alert notifications.
+- Email service credentials for email notifications.
+- Contact details of workers to notify in their preferred language.
+
+### JSON Structure
+Below is the template and explanation of each field you must fill out:
+```json
+{
+  "account_sid": "<Twilio Account SID>",
+  "auth_token": "<Twilio Auth Token>",
+  "twilio_number": "<Twilio Phone Number>",
+
+  "email": "<Sender Email Address>",
+  "email_password": "<Sender Email Password>",
+
+  "worker_emails": ["<Additional Recipient Emails>"],
+
+  "workers": [
+    {
+      "name": "<Worker Full Name>",
+      "phone": "<Worker Phone Number including country code>",
+      "email": "<Worker Email Address>",
+      "lang": "<Preferred Language Code (e.g., 'en', 'hi', 'ta')>"
+    },
+    {
+      "name": "...",
+      "phone": "...",
+      "email": "...",
+      "lang": "..."
+    }
+  ]
+}
+```
 
 ## Notes
 

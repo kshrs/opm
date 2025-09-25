@@ -120,7 +120,6 @@ def send_alert(request):
     with open("./core/alert/keys.json", "r") as f:
         data = json.load(f)
         workers = data["workers"]
-        # worker_emails = data["worker_emails"]
         alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
 
 
