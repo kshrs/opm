@@ -3,11 +3,12 @@ from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
 import pandas as pd
-import core.alert.email_alert as email
 import asyncio
 import os
 
 import core.alert.sms as sms
+import core.alert.email_alert as email
+import core.alert.translate as translate
 import json
 
 
@@ -108,8 +109,13 @@ def predict(request):
 @api_view(['POST'])
 def send_alert(request):
     message = request.data.get('message','')
-
     methods = request.data.get('method',[]) 
+
+    if message == "" or message == None:
+        print("Null Values: Try Again with an Alert Message")
+        return Response({'sent_via': None, 'message': "No Message Sent"})
+
+
     
     with open("./core/alert/keys.json", "r") as f:
         data = json.load(f)
@@ -126,13 +132,19 @@ def send_alert(request):
             worker_email = worker["email"]
             worker_lang = worker["lang"]
 
+            if worker_lang != "en":
+                translated_message = translate.lang_change(worker_lang, message)
+            else:
+                translated_message = message
+
+
             if "sms" in methods:
-                sms.send_alert_message(message, worker_phone)
+                sms.send_alert_message(translated_message, worker_phone)
             if email != "none" and "email" in methods:
                 asyncio.run(email.send_email_alert(
                 recipient_email=worker_email,
                 subject=alert_subject,
-                body=message
+                body=translated_message
                 ))
             
 
@@ -140,5 +152,5 @@ def send_alert(request):
 
 
 
-        return Response({'sent_via': methods, 'message': message})
+        return Response({'sent_via': methods, 'message': translated_message})
 

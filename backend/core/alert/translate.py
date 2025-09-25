@@ -20,6 +20,3 @@ def lang_change(language,text= """URGENT SAFETY ALERT
 
     final_text = "\n".join(translated_lines)
     return final_text
-language = "hi"
-a=lang_change(language)
-print(a)
