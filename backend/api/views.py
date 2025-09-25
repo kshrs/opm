@@ -113,20 +113,30 @@ def send_alert(request):
     
     with open("./core/alert/keys.json", "r") as f:
         data = json.load(f)
-        worker_emails = data["worker_emails"]
+        workers = data["workers"]
+        # worker_emails = data["worker_emails"]
         alert_subject = "CRITICAL ALERT: Rockfall Detected in Open Pit Mine Sector 4"
 
 
         
 
-        if "sms" in methods:
-            sms.send_alert_message(message)
-        if "email" in methods:
-            asyncio.run(email.send_email_alert(
-            recipient_emails=worker_emails,
-            subject=alert_subject,
-            body=message
-            ))
+        for worker in workers:
+            worker_name = worker["name"]
+            worker_phone = worker["phone"]
+            worker_email = worker["email"]
+            worker_lang = worker["lang"]
+
+            if "sms" in methods:
+                sms.send_alert_message(message, worker_phone)
+            if email != "none" and "email" in methods:
+                asyncio.run(email.send_email_alert(
+                recipient_email=worker_email,
+                subject=alert_subject,
+                body=message
+                ))
+            
+
+            print("Sent Alert via:", methods, " to:", worker_name)
 
 
 

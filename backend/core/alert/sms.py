@@ -4,7 +4,7 @@ import datetime
 import os
 
 
-def send_alert_message(msg):
+def send_alert_message(msg, phone):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     keys_path = os.path.join(current_dir, "keys.json")
     try:
@@ -23,12 +23,11 @@ def send_alert_message(msg):
             message = client.messages.create(
                 body=msg,
                 from_=data["twilio_number"],
-                to=data["user_number"]
+                to=phone
             )
         
         
-            print("SMS Alert Sent Successfully")
-            print(message.sid)
+            print("SMS Alert Sent Successfully to:", phone, " SID:", message.sid)
         
     except FileNotFoundError:
             print("Some files are not available.")

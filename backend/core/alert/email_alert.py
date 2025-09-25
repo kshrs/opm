@@ -12,7 +12,7 @@ keys_path = os.path.join(current_dir, "keys.json")
 
 
 
-async def send_email_alert(recipient_emails: List[str], subject: str, body: str):
+async def send_email_alert(recipient_email, subject, body):
     try:
         with open(keys_path,"r") as file:
             data=json.load(file)
@@ -23,23 +23,23 @@ async def send_email_alert(recipient_emails: List[str], subject: str, body: str)
             SMTP_PORT = 587 
             msg = EmailMessage()
             msg['From'] = SENDER_EMAIL
-            msg['To'] = ", ".join(recipient_emails)
+            msg['To'] = recipient_email
             msg['Subject'] = subject
 
             msg.set_content(body)
 
             server = None 
             try:
-                print(f"Connecting to SMTP server at {SMTP_SERVER}:{SMTP_PORT}...")
+                print(f"[Email Process]: Connecting to SMTP server at {SMTP_SERVER}:{SMTP_PORT}...")
                 server = aiosmtplib.SMTP(hostname=SMTP_SERVER, port=SMTP_PORT, start_tls=True)
                 await server.connect()
-                print(f"Logging in as {SENDER_EMAIL}...")
+                print(f"[Email Process]: Logging in as {SENDER_EMAIL}...")
                 await server.login(SENDER_EMAIL, EMAIL_PASSWORD)
-                await server.sendmail(SENDER_EMAIL, recipient_emails, msg.as_string())
-                print("Email sent ")  
+                await server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
+                print("[Email Process]: Email Sent Successfully to:", recipient_email)  
             finally:
                 if server:
-                    print("Closing connection to the SMTP server.")
+                    print("[Email Process]: Closing connection to the SMTP server.")
                     await server.quit()
     except FileNotFoundError:
             print(f"Error: Configuration file 'key.json' not found at '{keys_path}'.")

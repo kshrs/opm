@@ -14,7 +14,7 @@ export default {
   predict: (payload) => api.post('/predict/', payload),
 
   // POST /api/send-alert
-  sendAlert: (payload) => api.post('/send-alert/', payload),
+  sendAlert: (payload) => api.post('/send-alert/', payload, {timeout: 0}),
 
   // GET /api/elevation/:lat/:lon
   getElevation: (lat, lon) => api.get(`/elevation/${lat}/${lon}`),
