@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from rest_framework.decorators import api_view
+
 from rest_framework.response import Response
 from datetime import datetime
 from xgboost import XGBRegressor
@@ -138,7 +141,7 @@ def send_alert(request):
 
 
             if "sms" in methods:
-                sms.send_alert_message(translated_message, worker_phone)
+                sms.send_alert_message(message, worker_phone)
             if email != "none" and "email" in methods:
                 asyncio.run(email.send_email_alert(
                 recipient_email=worker_email,
