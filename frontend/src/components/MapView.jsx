@@ -70,7 +70,6 @@ export default function MapView() {
       })
       .catch((err) => console.error("Error loading GeoJSON:", err));
 
-    contourLayer.addTo(map)
     markers.addTo(map)
 
     L.control.layers({ Map: osm, Satellite: sat }, { Contour: contourLayer, Markers: markers}).addTo(map);
