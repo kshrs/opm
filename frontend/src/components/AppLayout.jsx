@@ -5,6 +5,8 @@ import MapView from './MapView';
 import PredictionForm from './PredictionForm'; // example right-side content
 import ZoneCards from './ZoneCards';
 import AlertForm from './AlertForm';
+import Chart from './Chart';
+import FeatureSelect from './FeatureSelect';
 
 export default function AppLayout() {
   return (
@@ -24,6 +26,14 @@ export default function AppLayout() {
       <div className="bottom-layout">
         <div className="alert-box">
           <AlertForm />
+        </div>
+      </div>
+      <div className="chart-layout">
+        <div className="feature-select">
+          <FeatureSelect />
+        </div>
+        <div className="chart">
+          <Chart />
         </div>
       </div>
     </div>

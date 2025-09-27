@@ -10,6 +10,7 @@ import core.alert.sms as sms
 import core.alert.email_alert as email
 import core.alert.translate as translate
 import json
+import random
 
 
 @api_view(['GET'])
@@ -137,7 +138,7 @@ def send_alert(request):
                 translated_message = message
 
 
-            if "sms" in methods:
+            if worker_phone != "none" and "sms" in methods:
                 sms.send_alert_message(translated_message, worker_phone)
             if email != "none" and "email" in methods:
                 asyncio.run(email.send_email_alert(
@@ -153,3 +154,12 @@ def send_alert(request):
 
         return Response({'sent_via': methods, 'message': translated_message})
 
+@api_view(['GET'])
+def getLastData(request, feature):
+    value = random.randint(0,10)
+
+    data = {
+            "feature": feature,
+            "value": value
+    }
+    return Response(data)

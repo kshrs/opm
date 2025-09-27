@@ -18,5 +18,8 @@ export default {
 
   // GET /api/elevation/:lat/:lon
   getElevation: (lat, lon) => api.get(`/elevation/${lat}/${lon}`),
+   
+  // GET /api/features/:feature/last
+  getLastData: (feature) => api.get(`/features/${feature}/last`),
 };
 

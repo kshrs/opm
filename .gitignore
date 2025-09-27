@@ -17,6 +17,9 @@ staticfiles/
 *.log
 local_settings.py
 
+# Datasets
+*.csv
+
 # Important Keys
 /backend/core/alert/keys.json
 
