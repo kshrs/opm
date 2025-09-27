@@ -27,7 +27,7 @@ def send_alert_message(msg, phone):
             )
         
         
-            print("SMS Alert Sent Successfully to:", phone, " SID:", message.sid)
+            print("SMS Alert Sent Successfully to:", phone, " SID:", message.sid, "Error:", message.error_message)
         
     except FileNotFoundError:
             print("Some files are not available.")
